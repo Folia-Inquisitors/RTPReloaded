@@ -1,6 +1,6 @@
 # RTPReloaded
 
-RTPReloaded is a fresh Paper plugin inspired by the pain points people run into with older RTP plugins, not a fork of BetterRTP.
+RTPReloaded is a fresh Paper plugin inspired by the pain points people run into with older RTP plugins, not a fork of an exisiting plugin.
 
 ## Goals
 
