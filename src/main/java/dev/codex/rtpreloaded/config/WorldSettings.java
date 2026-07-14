@@ -1,4 +1,4 @@
-package dev.codex.truertp.config;
+package dev.codex.rtpreloaded.config;
 
 public record WorldSettings(
         String worldName,

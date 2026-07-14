@@ -1,8 +1,8 @@
-package dev.codex.truertp.portal;
+package dev.codex.rtpreloaded.portal;
 
-import dev.codex.truertp.TrueRtpPlugin;
-import dev.codex.truertp.message.MessageService;
-import dev.codex.truertp.teleport.TeleportService;
+import dev.codex.rtpreloaded.RtpReloadedPlugin;
+import dev.codex.rtpreloaded.message.MessageService;
+import dev.codex.rtpreloaded.teleport.TeleportService;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -18,12 +18,12 @@ import org.bukkit.event.player.PlayerMoveEvent;
 public final class PortalListener implements Listener {
     private static final long PORTAL_COOLDOWN_MILLIS = 3_000L;
 
-    private final TrueRtpPlugin plugin;
+    private final RtpReloadedPlugin plugin;
     private final TeleportService teleportService;
     private final MessageService messages;
     private final Map<UUID, Long> cooldowns = new HashMap<>();
 
-    public PortalListener(TrueRtpPlugin plugin, TeleportService teleportService, MessageService messages) {
+    public PortalListener(RtpReloadedPlugin plugin, TeleportService teleportService, MessageService messages) {
         this.plugin = plugin;
         this.teleportService = teleportService;
         this.messages = messages;
@@ -48,7 +48,7 @@ public final class PortalListener implements Listener {
         }
         cooldowns.put(player.getUniqueId(), now + PORTAL_COOLDOWN_MILLIS);
 
-        if (!player.hasPermission("truertp.use")) {
+        if (!hasPermission(player, "use")) {
             messages.send(player, "no-permission");
             return;
         }
@@ -64,6 +64,9 @@ public final class PortalListener implements Listener {
         teleportService.teleportFromPortal(player, targetWorld);
     }
 
+    private boolean hasPermission(Player player, String node) {
+        return player.hasPermission("rtpreloaded." + node) || player.hasPermission("truertp." + node);
+    }
     private PortalMatch findPortal(Location location) {
         ConfigurationSection portals = plugin.getConfig().getConfigurationSection("portals");
         if (portals == null) {

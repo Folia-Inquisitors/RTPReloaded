@@ -1,7 +1,7 @@
-package dev.codex.truertp.teleport;
+package dev.codex.rtpreloaded.teleport;
 
-import dev.codex.truertp.TrueRtpPlugin;
-import dev.codex.truertp.message.MessageService;
+import dev.codex.rtpreloaded.RtpReloadedPlugin;
+import dev.codex.rtpreloaded.message.MessageService;
 import io.papermc.paper.threadedregions.scheduler.ScheduledTask;
 import java.util.HashMap;
 import java.util.Map;
@@ -10,11 +10,11 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 public final class CountdownManager {
-    private final TrueRtpPlugin plugin;
+    private final RtpReloadedPlugin plugin;
     private final MessageService messages;
     private final Map<UUID, ScheduledTask> activeTasks = new HashMap<>();
 
-    public CountdownManager(TrueRtpPlugin plugin, MessageService messages) {
+    public CountdownManager(RtpReloadedPlugin plugin, MessageService messages) {
         this.plugin = plugin;
         this.messages = messages;
     }

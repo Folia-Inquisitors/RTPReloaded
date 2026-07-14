@@ -1,10 +1,10 @@
-package dev.codex.truertp.teleport;
+package dev.codex.rtpreloaded.teleport;
 
-import dev.codex.truertp.TrueRtpPlugin;
-import dev.codex.truertp.config.SafetySettings;
-import dev.codex.truertp.config.WorldSettings;
-import dev.codex.truertp.random.RandomPoint;
-import dev.codex.truertp.random.RandomPointSampler;
+import dev.codex.rtpreloaded.RtpReloadedPlugin;
+import dev.codex.rtpreloaded.config.SafetySettings;
+import dev.codex.rtpreloaded.config.WorldSettings;
+import dev.codex.rtpreloaded.random.RandomPoint;
+import dev.codex.rtpreloaded.random.RandomPointSampler;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
@@ -17,10 +17,10 @@ import org.bukkit.World;
 import org.bukkit.block.Block;
 
 public final class SafeLocationFinder {
-    private final TrueRtpPlugin plugin;
+    private final RtpReloadedPlugin plugin;
     private final RandomPointSampler sampler = new RandomPointSampler();
 
-    public SafeLocationFinder(TrueRtpPlugin plugin) {
+    public SafeLocationFinder(RtpReloadedPlugin plugin) {
         this.plugin = plugin;
     }
 

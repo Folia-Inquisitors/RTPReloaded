@@ -1,17 +1,21 @@
-package dev.codex.truertp;
+package dev.codex.rtpreloaded;
 
-import dev.codex.truertp.command.RtpCommand;
-import dev.codex.truertp.command.TrueRtpCommand;
-import dev.codex.truertp.config.ConfigService;
-import dev.codex.truertp.message.MessageService;
-import dev.codex.truertp.portal.PortalListener;
-import dev.codex.truertp.teleport.CountdownManager;
-import dev.codex.truertp.teleport.TeleportService;
+import dev.codex.rtpreloaded.command.RtpCommand;
+import dev.codex.rtpreloaded.command.RtpReloadedCommand;
+import dev.codex.rtpreloaded.config.ConfigService;
+import dev.codex.rtpreloaded.message.MessageService;
+import dev.codex.rtpreloaded.portal.PortalListener;
+import dev.codex.rtpreloaded.teleport.CountdownManager;
+import dev.codex.rtpreloaded.teleport.TeleportService;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.logging.Level;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public final class TrueRtpPlugin extends JavaPlugin {
+public final class RtpReloadedPlugin extends JavaPlugin {
     private ConfigService configService;
     private MessageService messageService;
     private CountdownManager countdownManager;
@@ -19,6 +23,7 @@ public final class TrueRtpPlugin extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        migrateLegacyDataFolder();
         saveDefaultConfig();
 
         this.messageService = new MessageService(this);
@@ -30,7 +35,7 @@ public final class TrueRtpPlugin extends JavaPlugin {
         registerCommands();
         getServer().getPluginManager().registerEvents(new PortalListener(this, teleportService, messageService), this);
 
-        getLogger().info("TrueRTP enabled.");
+        getLogger().info("RTPReloaded enabled.");
     }
 
     @Override
@@ -66,6 +71,39 @@ public final class TrueRtpPlugin extends JavaPlugin {
         return messageService;
     }
 
+
+    private void migrateLegacyDataFolder() {
+        File newFolder = getDataFolder();
+        File pluginsFolder = newFolder.getParentFile();
+        if (pluginsFolder == null) {
+            return;
+        }
+
+        File legacyFolder = new File(pluginsFolder, "TrueRTP");
+        if (!legacyFolder.isDirectory() || legacyFolder.equals(newFolder)) {
+            return;
+        }
+
+        copyLegacyFile(legacyFolder, newFolder, "config.yml");
+        copyLegacyFile(legacyFolder, newFolder, "messages.yml");
+    }
+
+    private void copyLegacyFile(File legacyFolder, File newFolder, String fileName) {
+        File source = new File(legacyFolder, fileName);
+        File destination = new File(newFolder, fileName);
+        if (!source.isFile() || destination.exists()) {
+            return;
+        }
+
+        try {
+            Files.createDirectories(newFolder.toPath());
+            Files.copy(source.toPath(), destination.toPath(), StandardCopyOption.COPY_ATTRIBUTES);
+            getLogger().info("Migrated legacy TrueRTP " + fileName + " to RTPReloaded.");
+        } catch (IOException exception) {
+            getLogger().log(Level.WARNING, "Could not migrate legacy TrueRTP " + fileName + ".", exception);
+        }
+    }
+
     private void registerCommands() {
         RtpCommand rtpCommand = new RtpCommand(this, teleportService, messageService);
         PluginCommand rtp = getCommand("rtp");
@@ -74,8 +112,8 @@ public final class TrueRtpPlugin extends JavaPlugin {
             rtp.setTabCompleter(rtpCommand);
         }
 
-        TrueRtpCommand adminCommand = new TrueRtpCommand(this, messageService);
-        PluginCommand trueRtp = getCommand("truertp");
+        RtpReloadedCommand adminCommand = new RtpReloadedCommand(this, messageService);
+        PluginCommand trueRtp = getCommand("rtpreloaded");
         if (trueRtp != null) {
             trueRtp.setExecutor(adminCommand);
             trueRtp.setTabCompleter(adminCommand);

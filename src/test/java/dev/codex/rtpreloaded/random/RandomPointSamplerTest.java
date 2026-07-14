@@ -1,4 +1,4 @@
-package dev.codex.truertp.random;
+package dev.codex.rtpreloaded.random;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 

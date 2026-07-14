@@ -1,7 +1,7 @@
-package dev.codex.truertp.command;
+package dev.codex.rtpreloaded.command;
 
-import dev.codex.truertp.TrueRtpPlugin;
-import dev.codex.truertp.message.MessageService;
+import dev.codex.rtpreloaded.RtpReloadedPlugin;
+import dev.codex.rtpreloaded.message.MessageService;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -20,15 +20,15 @@ import org.bukkit.command.TabCompleter;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 
-public final class TrueRtpCommand implements CommandExecutor, TabCompleter {
+public final class RtpReloadedCommand implements CommandExecutor, TabCompleter {
     private static final List<String> ROOT_COMMANDS = List.of("reload", "debug", "portal");
     private static final List<String> PORTAL_COMMANDS = List.of("create", "pos1", "pos2", "delete", "list", "enable", "disable", "settarget");
 
-    private final TrueRtpPlugin plugin;
+    private final RtpReloadedPlugin plugin;
     private final MessageService messages;
     private final Map<UUID, PortalSelection> pendingSelections = new HashMap<>();
 
-    public TrueRtpCommand(TrueRtpPlugin plugin, MessageService messages) {
+    public RtpReloadedCommand(RtpReloadedPlugin plugin, MessageService messages) {
         this.plugin = plugin;
         this.messages = messages;
     }
@@ -41,7 +41,7 @@ public final class TrueRtpCommand implements CommandExecutor, TabCompleter {
         }
 
         if (args[0].equalsIgnoreCase("reload")) {
-            if (!sender.hasPermission("truertp.reload")) {
+            if (!hasPermission(sender, "reload")) {
                 messages.send(sender, "no-permission");
                 return true;
             }
@@ -52,7 +52,7 @@ public final class TrueRtpCommand implements CommandExecutor, TabCompleter {
         }
 
         if (args[0].equalsIgnoreCase("debug")) {
-            if (!sender.hasPermission("truertp.debug")) {
+            if (!hasPermission(sender, "debug")) {
                 messages.send(sender, "no-permission");
                 return true;
             }
@@ -105,7 +105,7 @@ public final class TrueRtpCommand implements CommandExecutor, TabCompleter {
     }
 
     private boolean handlePortal(CommandSender sender, String[] args) {
-        if (!sender.hasPermission("truertp.portal")) {
+        if (!hasPermission(sender, "portal")) {
             messages.send(sender, "no-permission");
             return true;
         }
@@ -409,6 +409,9 @@ public final class TrueRtpCommand implements CommandExecutor, TabCompleter {
         plugin.reloadPluginConfig();
     }
 
+    private boolean hasPermission(CommandSender sender, String node) {
+        return sender.hasPermission("rtpreloaded." + node) || sender.hasPermission("truertp." + node);
+    }
     private record PortalSelection(Location pos1, Location pos2) {
         static PortalSelection empty() {
             return new PortalSelection(null, null);

@@ -1,10 +1,10 @@
-package dev.codex.truertp.teleport;
+package dev.codex.rtpreloaded.teleport;
 
-import dev.codex.truertp.TrueRtpPlugin;
-import dev.codex.truertp.config.ConfigService;
-import dev.codex.truertp.config.PluginSettings;
-import dev.codex.truertp.config.WorldSettings;
-import dev.codex.truertp.message.MessageService;
+import dev.codex.rtpreloaded.RtpReloadedPlugin;
+import dev.codex.rtpreloaded.config.ConfigService;
+import dev.codex.rtpreloaded.config.PluginSettings;
+import dev.codex.rtpreloaded.config.WorldSettings;
+import dev.codex.rtpreloaded.message.MessageService;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import org.bukkit.Bukkit;
@@ -13,14 +13,14 @@ import org.bukkit.World;
 import org.bukkit.entity.Player;
 
 public final class TeleportService {
-    private final TrueRtpPlugin plugin;
+    private final RtpReloadedPlugin plugin;
     private final ConfigService configService;
     private final MessageService messages;
     private final CountdownManager countdownManager;
     private final SafeLocationFinder locationFinder;
 
     public TeleportService(
-            TrueRtpPlugin plugin,
+            RtpReloadedPlugin plugin,
             ConfigService configService,
             MessageService messages,
             CountdownManager countdownManager

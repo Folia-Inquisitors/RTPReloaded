@@ -1,6 +1,6 @@
-# TrueRTP
+# RTPReloaded
 
-TrueRTP is a fresh Paper plugin inspired by the pain points people run into with older RTP plugins, not a fork of BetterRTP.
+RTPReloaded is a fresh Paper plugin inspired by the pain points people run into with older RTP plugins, not a fork of BetterRTP.
 
 ## Goals
 
@@ -23,7 +23,7 @@ mvn clean package
 The compiled plugin will be created at:
 
 ```text
-target/TrueRTP-1.0.0.jar
+target/RTPReloaded-1.0.0.jar
 ```
 
 ## Commands
@@ -33,11 +33,12 @@ target/TrueRTP-1.0.0.jar
 /rtp <world>
 /rtp <player>
 /rtp <player> <world>
-/truertp reload
-/truertp debug
-/truertp portal create <portal> <target-world>
-/truertp portal pos1 <portal>
-/truertp portal pos2 <portal>
+/rtpreloaded reload
+/rtpreloaded debug
+/rtpreloaded portal create <portal> <target-world>
+/rtpreloaded portal pos1 <portal>
+/rtpreloaded portal pos2 <portal>
+/truertp reload              Legacy alias for /rtpreloaded reload
 ```
 
 Portal `pos1` and `pos2` use the block the player is looking at within 6 blocks, falling back to the player's current block if no target block is found.
@@ -45,12 +46,15 @@ Portal `pos1` and `pos2` use the block the player is looking at within 6 blocks,
 ## Permissions
 
 ```text
-truertp.use       Allows /rtp for yourself and portal RTP
-truertp.others    Allows teleporting another player
-truertp.reload    Allows /truertp reload
-truertp.debug     Allows /truertp debug
+rtpreloaded.use       Allows /rtp for yourself and portal RTP
+rtpreloaded.others    Allows teleporting another player
+rtpreloaded.reload    Allows /rtpreloaded reload
+rtpreloaded.debug     Allows /rtpreloaded debug
+rtpreloaded.portal    Allows managing portals
 ```
+
+Legacy `truertp.*` permission nodes are still accepted for existing setups.
 
 ## Randomness Note
 
-TrueRTP samples a random angle plus a radius transformed with `sqrt(...)`. That matters because picking a raw radius directly would put too many teleports near the center. This gives each area of the configured ring an equal chance.
+RTPReloaded samples a random angle plus a radius transformed with `sqrt(...)`. That matters because picking a raw radius directly would put too many teleports near the center. This gives each area of the configured ring an equal chance.

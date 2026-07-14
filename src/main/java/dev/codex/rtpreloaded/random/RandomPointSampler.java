@@ -1,4 +1,4 @@
-package dev.codex.truertp.random;
+package dev.codex.rtpreloaded.random;
 
 import java.security.SecureRandom;
 import java.util.Objects;

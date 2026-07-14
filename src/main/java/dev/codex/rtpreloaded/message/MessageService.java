@@ -1,6 +1,6 @@
-package dev.codex.truertp.message;
+package dev.codex.rtpreloaded.message;
 
-import dev.codex.truertp.TrueRtpPlugin;
+import dev.codex.rtpreloaded.RtpReloadedPlugin;
 import java.io.File;
 import java.util.Map;
 import org.bukkit.ChatColor;
@@ -9,10 +9,10 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.command.CommandSender;
 
 public final class MessageService {
-    private final TrueRtpPlugin plugin;
+    private final RtpReloadedPlugin plugin;
     private FileConfiguration messages;
 
-    public MessageService(TrueRtpPlugin plugin) {
+    public MessageService(RtpReloadedPlugin plugin) {
         this.plugin = plugin;
     }
 

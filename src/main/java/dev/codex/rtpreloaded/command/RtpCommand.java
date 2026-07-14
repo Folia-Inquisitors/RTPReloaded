@@ -1,8 +1,8 @@
-package dev.codex.truertp.command;
+package dev.codex.rtpreloaded.command;
 
-import dev.codex.truertp.TrueRtpPlugin;
-import dev.codex.truertp.message.MessageService;
-import dev.codex.truertp.teleport.TeleportService;
+import dev.codex.rtpreloaded.RtpReloadedPlugin;
+import dev.codex.rtpreloaded.message.MessageService;
+import dev.codex.rtpreloaded.teleport.TeleportService;
 import java.util.ArrayList;
 import java.util.List;
 import org.bukkit.Bukkit;
@@ -14,11 +14,11 @@ import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 
 public final class RtpCommand implements CommandExecutor, TabCompleter {
-    private final TrueRtpPlugin plugin;
+    private final RtpReloadedPlugin plugin;
     private final TeleportService teleportService;
     private final MessageService messages;
 
-    public RtpCommand(TrueRtpPlugin plugin, TeleportService teleportService, MessageService messages) {
+    public RtpCommand(RtpReloadedPlugin plugin, TeleportService teleportService, MessageService messages) {
         this.plugin = plugin;
         this.teleportService = teleportService;
         this.messages = messages;
@@ -26,7 +26,7 @@ public final class RtpCommand implements CommandExecutor, TabCompleter {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (!sender.hasPermission("truertp.use")) {
+        if (!hasPermission(sender, "use")) {
             messages.send(sender, "no-permission");
             return true;
         }
@@ -45,12 +45,12 @@ public final class RtpCommand implements CommandExecutor, TabCompleter {
         List<String> suggestions = new ArrayList<>();
         if (args.length == 1) {
             addEnabledWorlds(suggestions);
-            if (sender.hasPermission("truertp.others")) {
+            if (hasPermission(sender, "others")) {
                 for (Player player : Bukkit.getOnlinePlayers()) {
                     suggestions.add(player.getName());
                 }
             }
-        } else if (args.length == 2 && sender.hasPermission("truertp.others")) {
+        } else if (args.length == 2 && hasPermission(sender, "others")) {
             addEnabledWorlds(suggestions);
         }
         return suggestions;
@@ -100,7 +100,7 @@ public final class RtpCommand implements CommandExecutor, TabCompleter {
     }
 
     private Target resolveOtherPlayer(CommandSender sender, String playerName, World world) {
-        if (!sender.hasPermission("truertp.others")) {
+        if (!hasPermission(sender, "others")) {
             messages.send(sender, "no-permission");
             return null;
         }
@@ -113,6 +113,9 @@ public final class RtpCommand implements CommandExecutor, TabCompleter {
         return new Target(player, world);
     }
 
+    private boolean hasPermission(CommandSender sender, String node) {
+        return sender.hasPermission("rtpreloaded." + node) || sender.hasPermission("truertp." + node);
+    }
     private record Target(Player player, World world) {
     }
 }

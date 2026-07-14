@@ -1,4 +1,4 @@
-package dev.codex.truertp.config;
+package dev.codex.rtpreloaded.config;
 
 import java.util.Map;
 import java.util.Set;

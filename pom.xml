@@ -4,11 +4,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>dev.codex</groupId>
-    <artifactId>truertp</artifactId>
+    <artifactId>rtpreloaded</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
 
-    <name>TrueRTP</name>
+    <name>RTPReloaded</name>
     <description>A modern, configurable, genuinely random RTP plugin for Paper servers.</description>
 
     <properties>
@@ -42,7 +42,7 @@
     </dependencies>
 
     <build>
-        <finalName>TrueRTP-${project.version}</finalName>
+        <finalName>RTPReloaded-${project.version}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

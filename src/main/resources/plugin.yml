@@ -1,6 +1,6 @@
-name: TrueRTP
+name: RTPReloaded
 version: '1.0.0'
-main: dev.codex.truertp.TrueRtpPlugin
+main: dev.codex.rtpreloaded.RtpReloadedPlugin
 api-version: '1.21'
 author: Codex
 description: A modern, stable, genuinely random RTP plugin.
@@ -11,23 +11,39 @@ commands:
     description: Randomly teleport yourself or another player.
     usage: /rtp [player] [world]
     aliases: [wild, randomtp]
-  truertp:
-    description: TrueRTP admin commands.
-    usage: /truertp <reload|debug|portal>
+  rtpreloaded:
+    description: RTPReloaded admin commands.
+    usage: /rtpreloaded <reload|debug|portal>
+    aliases: [truertp]
 
 permissions:
-  truertp.use:
+  rtpreloaded.use:
     description: Allows a player to use /rtp.
     default: true
-  truertp.others:
+  rtpreloaded.others:
     description: Allows a player to RTP another player.
     default: op
-  truertp.reload:
-    description: Allows reloading TrueRTP configs.
+  rtpreloaded.reload:
+    description: Allows reloading RTPReloaded configs.
     default: op
-  truertp.debug:
+  rtpreloaded.debug:
     description: Allows toggling debug logging.
     default: op
+  rtpreloaded.portal:
+    description: Allows managing RTPReloaded portals.
+    default: op
+  truertp.use:
+    description: Legacy alias for rtpreloaded.use.
+    default: true
+  truertp.others:
+    description: Legacy alias for rtpreloaded.others.
+    default: op
+  truertp.reload:
+    description: Legacy alias for rtpreloaded.reload.
+    default: op
+  truertp.debug:
+    description: Legacy alias for rtpreloaded.debug.
+    default: op
   truertp.portal:
-    description: Allows managing TrueRTP portals.
+    description: Legacy alias for rtpreloaded.portal.
     default: op

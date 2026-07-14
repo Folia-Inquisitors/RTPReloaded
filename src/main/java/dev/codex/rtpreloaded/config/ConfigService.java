@@ -1,6 +1,6 @@
-package dev.codex.truertp.config;
+package dev.codex.rtpreloaded.config;
 
-import dev.codex.truertp.TrueRtpPlugin;
+import dev.codex.rtpreloaded.RtpReloadedPlugin;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Locale;
@@ -11,10 +11,10 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 
 public final class ConfigService {
-    private final TrueRtpPlugin plugin;
+    private final RtpReloadedPlugin plugin;
     private PluginSettings settings;
 
-    public ConfigService(TrueRtpPlugin plugin) {
+    public ConfigService(RtpReloadedPlugin plugin) {
         this.plugin = plugin;
     }
 
