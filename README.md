@@ -43,6 +43,8 @@ target/RTPReloaded-1.0.0.jar
 
 Portal `pos1` and `pos2` use the block the player is looking at within 6 blocks, falling back to the player's current block if no target block is found.
 
+Command labels are normalized case-insensitively, so `/rtP`, `/RTP`, and `/Rtp` all resolve to `/rtp`.
+
 ## Permissions
 
 ```text

@@ -1,5 +1,6 @@
 package dev.codex.rtpreloaded;
 
+import dev.codex.rtpreloaded.command.CommandAliasNormalizer;
 import dev.codex.rtpreloaded.command.RtpCommand;
 import dev.codex.rtpreloaded.command.RtpReloadedCommand;
 import dev.codex.rtpreloaded.config.ConfigService;
@@ -33,6 +34,7 @@ public final class RtpReloadedPlugin extends JavaPlugin {
 
         reloadPluginConfig();
         registerCommands();
+        getServer().getPluginManager().registerEvents(new CommandAliasNormalizer(), this);
         getServer().getPluginManager().registerEvents(new PortalListener(this, teleportService, messageService), this);
 
         getLogger().info("RTPReloaded enabled.");
