@@ -1,0 +1,33 @@
+name: TrueRTP
+version: '1.0.0'
+main: dev.codex.truertp.TrueRtpPlugin
+api-version: '1.21'
+author: Codex
+description: A modern, stable, genuinely random RTP plugin.
+folia-supported: true
+
+commands:
+  rtp:
+    description: Randomly teleport yourself or another player.
+    usage: /rtp [player] [world]
+    aliases: [wild, randomtp]
+  truertp:
+    description: TrueRTP admin commands.
+    usage: /truertp <reload|debug|portal>
+
+permissions:
+  truertp.use:
+    description: Allows a player to use /rtp.
+    default: true
+  truertp.others:
+    description: Allows a player to RTP another player.
+    default: op
+  truertp.reload:
+    description: Allows reloading TrueRTP configs.
+    default: op
+  truertp.debug:
+    description: Allows toggling debug logging.
+    default: op
+  truertp.portal:
+    description: Allows managing TrueRTP portals.
+    default: op

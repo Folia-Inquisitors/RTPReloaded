@@ -1,0 +1,75 @@
+debug: false
+
+teleport:
+  # Attempts are bounded so one bad world cannot freeze command flow forever.
+  attempts: 64
+
+  # Delay before teleporting. Players see a countdown.
+  delay-seconds: 5
+
+  # If true, moving to another block cancels the countdown.
+  cancel-on-move: true
+
+  # How long to wait for a chunk to load while searching for a safe location.
+  chunk-load-timeout-ticks: 100
+
+  # If true, /rtp uses the player's current world first when that world is enabled.
+  use-current-world-first: true
+
+  # Fallback world if current-world RTP is disabled or not usable.
+  default-world: world
+
+# Global RTP settings. Every enabled world uses these unless it has an override below.
+global:
+  center-x: 0
+  center-z: 0
+  min-radius: 500
+  max-radius: 5000
+  min-y: -64
+  max-y: 320
+
+# Put worlds here when RTP should not work there.
+disabled-worlds:
+  - world_nether
+  - world_the_end
+
+# Optional per-world overrides.
+# Only add a world here when it needs settings different from global.
+worlds:
+  resource_world:
+    center-x: 1000
+    center-z: -500
+    min-radius: 1000
+    max-radius: 10000
+    min-y: -64
+    max-y: 320
+
+# Portal regions point to a target world and use that world's RTP settings.
+# min/max below are the physical portal corners, not the RTP radius.
+portals:
+  spawn-wild:
+    enabled: true
+    portal-world: world
+    target-world: world
+    min:
+      x: 12
+      y: 64
+      z: -8
+    max:
+      x: 16
+      y: 68
+      z: -4
+
+safety:
+  avoid-liquids: true
+  avoid-lava: true
+  allow-leaves: false
+  unsafe-ground:
+    - CACTUS
+    - CAMPFIRE
+    - FIRE
+    - LAVA
+    - MAGMA_BLOCK
+    - POWDER_SNOW
+    - SOUL_CAMPFIRE
+    - SWEET_BERRY_BUSH
