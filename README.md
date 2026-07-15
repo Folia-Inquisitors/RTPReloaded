@@ -1,29 +1,11 @@
 # RTPReloaded
 
-RTPReloaded is a fresh Paper plugin inspired by the pain points people run into with older RTP plugins, not a fork of an exisiting plugin.
+RTPReloaded is a generic rtp plugin that has the core features of popular RTP plugins. It's is not bloated, it is version stable, and has been tested. This rtp plugin also truly randomly teleports you into random locations.
 
-## Goals
-
-- Stable teleport flow with bounded attempts and clear failure messages.
-- Uniform random coordinates across a configurable min/max radius.
-- Configurable countdown delay with editable words for command-based RTP.
-- Portal RTP that triggers instantly when a player enters the portal region.
-- Per-world enable/disable rules.
-- World-specific center, min radius, max radius, min Y, and max Y.
-- Debug logging that explains why candidates are rejected.
-
-## Build
-
-This project targets Paper and Java 21.
+## Build instructions
 
 ```bash
 mvn clean package
-```
-
-The compiled plugin will be created at:
-
-```text
-target/RTPReloaded-1.0.0.jar
 ```
 
 ## Commands
@@ -41,9 +23,9 @@ target/RTPReloaded-1.0.0.jar
 /truertp reload              Legacy alias for /rtpreloaded reload
 ```
 
-Portal `pos1` and `pos2` use the block the player is looking at within 6 blocks, falling back to the player's current block if no target block is found.
+##  Portal instructions 
 
-Command labels are normalized case-insensitively, so `/rtP`, `/RTP`, and `/Rtp` all resolve to `/rtp`.
+Portal `pos1` and `pos2` use the block the player is looking at within 6 blocks, falling back to the player's current block if no target block is found.
 
 ## Permissions
 
@@ -55,8 +37,11 @@ rtpreloaded.debug     Allows /rtpreloaded debug
 rtpreloaded.portal    Allows managing portals
 ```
 
-Legacy `truertp.*` permission nodes are still accepted for existing setups.
-
 ## Randomness Note
 
 RTPReloaded samples a random angle plus a radius transformed with `sqrt(...)`. That matters because picking a raw radius directly would put too many teleports near the center. This gives each area of the configured ring an equal chance.
+
+## Folia Inquisitors
+
+[<img src="https://github.com/Folia-Inquisitors.png" width="80" alt="Folia-Inquisitors">](https://github.com/orgs/Folia-Inquisitors/repositories)
+[<img src="https://github.com/Yomamaeatstoes.png" width="80" alt="Yomamaeatstoes">](https://github.com/Yomamaeatstoes)
